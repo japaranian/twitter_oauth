@@ -10,7 +10,7 @@ var passport = require('passport')
 	, TwitterStrategy = require('passport-twitter').Strategy;
 var session = require('express-session');
 var connect = require('connect')
-var app = connect();
+// var app = connect();
 
 // var client = new Twitter({
 // 	consumer_key: '',
@@ -19,7 +19,7 @@ var app = connect();
 // 	access_token_secret: ''
 // });
 
-app.use(express.session({ secret: 'SECRET' }));
+app.use(session({ secret: 'SECRET' }));
 
 var consumer_key = process.env.TWITTER_CONSUMER_KEY
 var consumer_secret = process.env.TWITTER_CONSUMER_SECRET
