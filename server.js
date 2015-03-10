@@ -10,6 +10,8 @@ var passport = require('passport')
 	, TwitterStrategy = require('passport-twitter').Strategy;
 var session = require('express-session');
 var connect = require('connect')
+var dotenv = require('dotenv');
+dotenv.load();
 // var app = connect();
 
 // var client = new Twitter({
@@ -34,7 +36,7 @@ passport.use(new TwitterStrategy({
 // }
 function(token, tokenSecret, profile, done) {
 	User.findOne({
-		'twitter.id_str': prodile.id
+		'twitter.id_str': profile.id
 	}, function(err, user) {
 		if (err) { 
 			return done(err); 
