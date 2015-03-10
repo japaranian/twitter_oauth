@@ -29,9 +29,16 @@ passport.use(new TwitterStrategy({
 	consumerSecret: consumer_secret,
 	callbackURL: "http://127.0.0.1:3000/oauth_callback_route"
 },
+// function(token, tokenSecret, profile, done){
+// 	done(null, profile);
+// }
 function(token, tokenSecret, profile, done) {
-	User.findOne(user.id, function(err, user) {
-		if (err) { return done(err); }
+	User.findOne({
+		'twitter.id_str': prodile.id
+	}, function(err, user) {
+		if (err) { 
+			return done(err); 
+		}
 		done(null, user);
 	});
 }
@@ -43,8 +50,8 @@ app.get('/', function (req, res){
 
 app.get('/auth/twitter', passport.authenticate('twitter'));
 
-app.get('/oauth_callback_route', passport.authenticate('twitter', { successRedirect: '/',
-																	failureRedirect: '/login'}));
+app.get('/oauth_callback_route', passport.authenticate('twitter', { successRedirect: '/views/show.html',
+																	failureRedirect: '/views/index.html'}));
 
 // app.get('/tweets', function (req, response){
 // 	request.get('https://api.twitter.com/oauth/request_token', function(error, res, body){
