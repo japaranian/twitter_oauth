@@ -11,7 +11,26 @@ var passport = require('passport')
 var session = require('express-session');
 var connect = require('connect')
 var dotenv = require('dotenv');
+var mongoose = require('mongoose');
 dotenv.load();
+var User = require('./models/user-model')
+
+var testUser = new User({
+	email: 'mina@gmail.com',
+	password: '123'
+})
+
+
+var connection = mongoose.connect('mongodb://localhost:testDB',
+	function(err){
+		if (err) throw err;
+		console.log('Successful connection!');
+	});
+
+testUser.save();
+
+console.log(testUser);
+
 // var app = connect();
 
 // var client = new Twitter({
